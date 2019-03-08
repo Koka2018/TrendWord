@@ -48,5 +48,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TrendWordGear\TrendWordGear.csproj">
+      <Project>{5a8c0c83-b635-449e-8ecd-aaca8c94cb79}</Project>
+      <Name>TrendWordGear</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
