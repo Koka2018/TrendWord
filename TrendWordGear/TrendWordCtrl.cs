@@ -46,9 +46,11 @@ namespace TrendWordGear
             while(node != null)
             {
                 var sp_Feature = node.Feature.Split(',');
-                if (sp_Feature[(int)EnumMeCabIdx.Type] == "名詞")
+                if (sp_Feature[(int)EnumMeCabIdx.Basic] != "*"
+                    && node.Surface != sp_Feature[(int)EnumMeCabIdx.Basic])
                 {
-                    Console.WriteLine(node.Surface + " : " + sp_Feature[(int)EnumMeCabIdx.Basic]);
+                    Console.WriteLine(node.Surface + " : " + sp_Feature[(int)EnumMeCabIdx.Basic]
+                                                + node.Feature.Replace(",", "\t"));
                 }
                 node = node.Next;
             }
