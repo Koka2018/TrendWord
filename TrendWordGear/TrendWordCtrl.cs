@@ -29,23 +29,43 @@ namespace TrendWordGear
         /// <returns>トークンテーブル</returns>
         public Dictionary<string, List<TokenData>> GetTokenTbl(string text)
         {
-            var tbl = new Dictionary<string, List<TokenData>>();
+            var tokenTbl = new Dictionary<string, List<TokenData>>();
 
             var node = mTagger.ParseToNode(text);
             while(node != null)
             {
                 var token = new TokenData(node.Surface, node.Feature);
 
-                if(tbl.ContainsKey(token.BasicWord) == false)
+                if(tokenTbl.ContainsKey(token.BasicWord) == false)
                 {
-                    tbl[token.BasicWord] = new List<TokenData>();
+                    tokenTbl[token.BasicWord] = new List<TokenData>();
                 }
-                tbl[token.BasicWord].Add(token);
+                tokenTbl[token.BasicWord].Add(token);
 
                 node = node.Next;
             }
 
-            return tbl;
+            return tokenTbl;
+        }
+
+        /// <summary>
+        /// トークンリスト取得処理
+        /// </summary>
+        /// <param name="text">テキスト</param>
+        /// <returns>トークンリスト</returns>
+        public List<TokenData> GetTokenList(string text)
+        {
+            var tokenList = new List<TokenData>();
+
+            var node = mTagger.ParseToNode(text);
+            while (node != null)
+            {
+                tokenList.Add(new TokenData(node.Surface, node.Feature));
+
+                node = node.Next;
+            }
+
+            return tokenList;
         }
 
         #endregion
