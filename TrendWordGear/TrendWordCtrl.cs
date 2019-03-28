@@ -27,7 +27,7 @@ namespace TrendWordGear
         /// </summary>
         /// <param name="text">テキスト</param>
         /// <returns>トークンテーブル</returns>
-        public Dictionary<string, List<TokenData>> GetTokenTbl(string text)
+        public Dictionary<string, List<TokenData>> GetBasicTokenTbl(string text)
         {
             var tokenTbl = new Dictionary<string, List<TokenData>>();
 
@@ -68,6 +68,27 @@ namespace TrendWordGear
             }
 
             return tokenList;
+        }
+
+        /// <summary>
+        /// トークンの品詞分類結果取得
+        /// </summary>
+        /// <param name="tokenList">トークンリスト</param>
+        /// <returns>品詞分離結果</returns>
+        public Dictionary<string, List<TokenData>> GetTokenTypeTbl(List<TokenData> tokenList)
+        {
+            var tokenTypeTbl = new Dictionary<string, List<TokenData>>();
+
+            foreach(var token in tokenList)
+            {
+                if(tokenTypeTbl.ContainsKey(token.Type)== false)
+                {
+                    tokenTypeTbl[token.Type] = new List<TokenData>();
+                }
+                tokenTypeTbl[token.Type].Add(token);
+            }
+
+            return tokenTypeTbl;
         }
 
         /// <summary>
