@@ -72,18 +72,46 @@
 
             for (int col = 0; col < sp_Feature.Length; col++)
             {
-                switch (col)
+                switch ((EnumMeCabIdx)col)
                 {
-                    case 0: Type = sp_Feature[col]; break;
-                    case 1: DetailType1 = sp_Feature[col]; break;
-                    case 2: DetailType2 = sp_Feature[col]; break;
-                    case 3: DetailType3 = sp_Feature[col]; break;
-                    case 4: AdaptMethod = sp_Feature[col]; break;
-                    case 5: AdaptType = sp_Feature[col]; break;
-                    case 6: BasicWord = sp_Feature[col]; break;
-                    case 7: WayOfRead = sp_Feature[col]; break;
-                    case 8: Pronunciation = sp_Feature[col]; break;
-                    default: break;
+                    case EnumMeCabIdx.Type:
+                        Type = sp_Feature[col];
+                        break;
+
+                    case EnumMeCabIdx.DetailType1:
+                        DetailType1 = sp_Feature[col];
+                        break;
+
+                    case EnumMeCabIdx.DetailType2:
+                        DetailType2 = sp_Feature[col];
+                        break;
+
+                    case EnumMeCabIdx.DetailType3:
+                        DetailType3 = sp_Feature[col];
+                        break;
+
+                    case EnumMeCabIdx.Adapted:
+                        AdaptMethod = sp_Feature[col];
+                        break;
+
+                    case EnumMeCabIdx.AdaptType:
+                        AdaptType = sp_Feature[col];
+                        break;
+
+                    case EnumMeCabIdx.Basic:
+                        BasicWord = sp_Feature[col];
+                        break;
+
+                    case EnumMeCabIdx.WayOfRead:
+                        WayOfRead = sp_Feature[col];
+                        break;
+
+                    case EnumMeCabIdx.Pronunciation:
+                        Pronunciation = sp_Feature[col];
+                        break;
+
+                    default:
+                        break;
                 }
             }
         }
