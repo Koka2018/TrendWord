@@ -68,6 +68,16 @@ namespace TrendWordGear
             return tokenList;
         }
 
+        /// <summary>
+        /// 段落（文の集合体）から文への変換
+        /// </summary>
+        /// <param name="paragram">段落</param>
+        /// <returns>文リスト</returns>
+        public List<string> SplitMultiSentence(string paragram)
+        {
+            return new List<string>(paragram.Split('。'));
+        }
+
         #endregion
     }
 }

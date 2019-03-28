@@ -6,15 +6,24 @@
 
         private enum EnumMeCabIdx
         {
-            Type = 0,       // 品詞
-            DetailType1,   // 品詞細分類1
-            DetailType2,   // 品詞細分類2
-            DetailType3,   // 品詞細分類3
-            Adapted,        // 活用形
-            AdaptType,     // 活用型
-            Basic,             // 原形
-            WayOfRead,    // 読み
-            Pronunciation, // 発音
+            ///<summary> 品詞 </summary>
+            Type = 0,
+            ///<summary> 品詞細分類1 </summary>
+            DetailType1,
+            ///<summary> 品詞細分類2 </summary>
+            DetailType2,
+            ///<summary> 品詞細分類3 </summary>
+            DetailType3,
+            ///<summary> 活用形 </summary>
+            Adapted,
+            ///<summary> 活用型 </summary>
+            AdaptType,
+            ///<summary> 原形 </summary>
+            Basic,
+            ///<summary> 読み </summary>
+            WayOfRead,
+            ///<summary> 発音 </summary>
+            Pronunciation,
         }
 
         #endregion
