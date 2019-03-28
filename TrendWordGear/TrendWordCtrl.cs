@@ -20,7 +20,7 @@ namespace TrendWordGear
         {
         }
 
-        #region メソッド
+        #region 形態素解析メソッド
 
         /// <summary>
         /// トークンテーブル取得処理
@@ -58,6 +58,8 @@ namespace TrendWordGear
             var tokenList = new List<TokenData>();
 
             var node = mTagger.ParseToNode(text);
+            // 一つ目は原文が入っているため読み飛ばす
+            node = node.Next;
             while (node != null)
             {
                 tokenList.Add(new TokenData(node.Surface, node.Feature));
@@ -76,6 +78,49 @@ namespace TrendWordGear
         public List<string> SplitMultiSentence(string paragram)
         {
             return new List<string>(paragram.Split('。'));
+        }
+
+        #endregion
+
+        #region 集計メソッド
+
+        /// <summary>
+        /// 品詞指定によるトークンリスト抽出処理
+        /// </summary>
+        /// <param name="tokenList">トークンリスト</param>
+        /// <param name="type">品詞</param>
+        /// <returns>抽出したトークン</returns>
+        public List<TokenData> ExtractTokenType(List<TokenData> tokenList, string type)
+        {
+            var extractTokenList = new List<TokenData>();
+            foreach(var token in tokenList)
+            {
+                if(token.Type == type)
+                {
+                    extractTokenList.Add(token);
+                }
+            }
+
+            return extractTokenList;
+        }
+
+        /// <summary>
+        /// 品詞指定によるトークンテーブル抽出処理
+        /// </summary>
+        /// <param name="tokenTbl">トークンテーブル</param>
+        /// <param name="type">品詞</param>
+        /// <returns>抽出したトークンテーブル</returns>
+        public Dictionary<string, List<TokenData>> ExtractTokenType(Dictionary<string, List<TokenData>> tokenTbl, string type)
+        {
+            var extractTokenTbl = new Dictionary<string, List<TokenData>>();
+
+            foreach(var key in tokenTbl.Keys)
+            {
+                if(tokenTbl[key][0].Type != type) { continue; }
+                extractTokenTbl[key] = new List<TokenData>(tokenTbl[key]);
+            }
+
+            return extractTokenTbl;
         }
 
         #endregion
