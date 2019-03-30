@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Model\Tests_TokenData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests_TrendWordCtrl.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

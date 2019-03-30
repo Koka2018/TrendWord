@@ -32,7 +32,8 @@ namespace TrendWordGear
             var tokenTbl = new Dictionary<string, List<TokenData>>();
 
             var node = mTagger.ParseToNode(text);
-            while(node != null)
+            node = node.Next;
+            while (node != null)
             {
                 var token = new TokenData(node.Surface, node.Feature);
 
@@ -89,16 +90,6 @@ namespace TrendWordGear
             }
 
             return tokenTypeTbl;
-        }
-
-        /// <summary>
-        /// 段落（文の集合体）から文への変換
-        /// </summary>
-        /// <param name="paragram">段落</param>
-        /// <returns>文リスト</returns>
-        public List<string> SplitMultiSentence(string paragram)
-        {
-            return new List<string>(paragram.Split('。'));
         }
 
         #endregion

@@ -15,7 +15,7 @@
             ///<summary> 品詞細分類3 </summary>
             DetailType3,
             ///<summary> 活用形 </summary>
-            Adapted,
+            AdaptMethod,
             ///<summary> 活用型 </summary>
             AdaptType,
             ///<summary> 原形 </summary>
@@ -31,28 +31,28 @@
         #region プロパティ
 
         ///<summary> Word </summary>
-        public string Word { get; private set; } = string.Empty;
+        public string Word { get; private set; }
         ///<summary> Feature </summary>
-        public string Feature { get; private set; } = string.Empty;
+        public string Feature { get; private set; }
 
         ///<summary> 品詞 </summary>
-        public string Type { get; private set; } = string.Empty;
+        public string Type { get; private set; }
         ///<summary> 品詞細分類1 </summary>
-        public string DetailType1 { get; private set; } = string.Empty;
+        public string DetailType1 { get; private set; }
         ///<summary> 品詞細分類2 </summary>
-        public string DetailType2 { get; private set; } = string.Empty;
+        public string DetailType2 { get; private set; }
         ///<summary> 品詞細分類3 </summary>
-        public string DetailType3 { get; private set; } = string.Empty;
+        public string DetailType3 { get; private set; }
         ///<summary> 活用形 </summary>
-        public string AdaptMethod { get; private set; } = string.Empty;
+        public string AdaptMethod { get; private set; }
         ///<summary> 活用型 </summary>
-        public string AdaptType { get; private set; } = string.Empty;
+        public string AdaptType { get; private set; }
         ///<summary> 原形 </summary>
-        public string BasicWord { get; private set; } = string.Empty;
+        public string BasicWord { get; private set; }
         ///<summary> 読み </summary>
-        public string WayOfRead { get; private set; } = string.Empty;
+        public string WayOfRead { get; private set; }
         ///<summary> 発音 </summary>
-        public string Pronunciation { get; private set; } = string.Empty;
+        public string Pronunciation { get; private set; }
 
         #endregion
 
@@ -63,6 +63,7 @@
         /// <param name="feature">Feature</param>
         public TokenData(string surface, string feature)
         {
+            Init();
             Word = surface;
             Feature = feature;
 
@@ -70,6 +71,25 @@
         }
 
         #region メソッド
+
+        /// <summary>
+        /// 初期化処理
+        /// </summary>
+        private void Init()
+        {
+            Word = string.Empty;
+            Feature = string.Empty;
+
+            Type = string.Empty;
+            DetailType1 = string.Empty;
+            DetailType2 = string.Empty;
+            DetailType3 = string.Empty;
+            AdaptMethod = string.Empty;
+            AdaptType = string.Empty;
+            BasicWord = string.Empty;
+            WayOfRead = string.Empty;
+            Pronunciation = string.Empty;
+        }
 
         /// <summary>
         /// Featureのパース
@@ -99,7 +119,7 @@
                         DetailType3 = sp_Feature[col];
                         break;
 
-                    case EnumMeCabIdx.Adapted:
+                    case EnumMeCabIdx.AdaptMethod:
                         AdaptMethod = sp_Feature[col];
                         break;
 
