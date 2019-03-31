@@ -64,8 +64,8 @@
         public TokenData(string surface, string feature)
         {
             Init();
-            Word = surface;
-            Feature = feature;
+            Word = surface.Replace("\0", "");
+            Feature = feature.Replace("\0", "");
 
             ParseFeature(feature);
         }

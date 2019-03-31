@@ -72,6 +72,7 @@ namespace TrendWordBox
                 foreach(var sentence in sentenceList)
                 {
                     var tokenList = mWordCtrl.GetTokenList(sentence);
+                    var tokenTbl = mWordCtrl.GetBasicTokenTbl(sentence);
                     var tokenTypeTb = mWordCtrl.GetTokenTypeTbl(tokenList);
 
                     sb.AppendLine("------------------------------");
@@ -79,9 +80,16 @@ namespace TrendWordBox
                     foreach(var key in tokenTypeTb.Keys)
                     {
                         sb.AppendLine(string.Format("\t=== {0} ===", key));
-                        foreach(var token in tokenTypeTb[key])
+                        var extractTokenTbl = mWordCtrl.ExtractTokenType(tokenTbl, key);
+                        foreach(var token in extractTokenTbl.Keys)
                         {
-                            sb.AppendLine("\t\t" + token.Word.Replace("\0", ""));
+                            sb.AppendLine(string.Format("\t\t{0}: {1}",
+                                                        token.Replace("\0", ""),
+                                                        extractTokenTbl[token].Count()));
+                            //foreach(var word in extractTokenTbl[token])
+                            //{
+                            //    sb.AppendLine(string.Format("\t\t\t{0}", word.Word));
+                            //}
                         }
                     }
                 }

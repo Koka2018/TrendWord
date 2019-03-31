@@ -24,7 +24,7 @@ namespace WordGear.Logic
         {
             var tokenTbl = new Dictionary<string, List<TokenData>>();
 
-            var node = sTagger.ParseToNode(text);
+            var node = sTagger.ParseToNode(text.Replace("\0", ""));
             node = node.Next;
             while (node != null)
             {
@@ -51,7 +51,7 @@ namespace WordGear.Logic
         {
             var tokenList = new List<TokenData>();
 
-            var node = sTagger.ParseToNode(text);
+            var node = sTagger.ParseToNode(text.Replace("\0", ""));
             // 一つ目は原文が入っているため読み飛ばす
             node = node.Next;
             while (node != null)
