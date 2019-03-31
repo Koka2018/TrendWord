@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace WordGear.Logic
 {
@@ -12,6 +13,11 @@ namespace WordGear.Logic
         public static List<string> SplitParagraph(string paragraph)
         {
             var sentenceList = new List<string>(paragraph.Split('。'));
+
+            if(sentenceList.Last().Length == 0)
+            {
+                sentenceList.RemoveAt(sentenceList.Count - 1);
+            }
 
             return sentenceList;
         }

@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using WordGear;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 
 namespace WordGear.Tests
@@ -140,7 +141,7 @@ namespace WordGear.Tests
             var extractedTokenList = ctrl.ExtractTokenType(tokenList, testData_type);
 
             Assert.AreEqual(testData_tokenNum, extractedTokenList.Count);
-            foreach(var token in extractedTokenList)
+            foreach (var token in extractedTokenList)
             {
                 Assert.AreEqual(testData_type, token.Type);
             }
@@ -163,7 +164,7 @@ namespace WordGear.Tests
             var extractedTokenTbl = ctrl.ExtractTokenType(tokenTbl, testData_type);
 
             Assert.AreEqual(testData_tokenNum, extractedTokenTbl.Keys.Count);
-            foreach(var subTokenList in extractedTokenTbl.Values)
+            foreach (var subTokenList in extractedTokenTbl.Values)
             {
                 foreach (var token in subTokenList)
                 {
@@ -173,5 +174,15 @@ namespace WordGear.Tests
         }
 
         #endregion
+
+        [TestMethod()]
+        public void 文章から文を抽出できること()
+        {
+            var ctrl = new WordCtrl();
+            var text = "形態素解析とは、文法的な情報の注記の無い自然言語のテキストデータから、対象言語の文法や、辞書と呼ばれる単語の品詞等の情報にもとづき、形態素の列に分割し、それぞれの形態素の品詞等を判別する作業である。";
+            var sentenceList = ctrl.SplitParagraph(text);
+
+            Assert.AreEqual(1, sentenceList.Count);
+        }
     }
 }
