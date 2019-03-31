@@ -131,7 +131,7 @@ namespace TrendWordGear.Tests
         [DataRow("形容詞", 1)]
         [DataRow("記号", 6)]
         [DataRow("BOS/EOS", 1)]
-        [DataRow("副詞", 0)]
+        [DataRow("副詞", 1)]
         public void 品詞を限定したトークンリストを取得できること(string testData_type, int testData_tokenNum)
         {
             var ctrl = new TrendWordCtrl();
