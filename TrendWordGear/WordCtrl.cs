@@ -49,11 +49,7 @@ namespace WordGear
         /// <param name="paragraph">文章</param>
         /// <returns>文リスト</returns>
         public List<string> SplitParagraph(string paragraph)
-        {
-            var sentenceList = new List<string>(paragraph.Split('。'));
-
-            return sentenceList;
-        }
+            => ParagraphLogic.SplitParagraph(paragraph);
 
         #endregion
 
@@ -66,18 +62,7 @@ namespace WordGear
         /// <param name="type">品詞</param>
         /// <returns>抽出したトークン</returns>
         public List<TokenData> ExtractTokenType(List<TokenData> tokenList, string type)
-        {
-            var extractTokenList = new List<TokenData>();
-            foreach(var token in tokenList)
-            {
-                if(token.Type == type)
-                {
-                    extractTokenList.Add(token);
-                }
-            }
-
-            return extractTokenList;
-        }
+            => AnalyzeLogic.ExtractTokenType(tokenList, type);
 
         /// <summary>
         /// 品詞指定によるトークンテーブル抽出処理
@@ -86,17 +71,7 @@ namespace WordGear
         /// <param name="type">品詞</param>
         /// <returns>抽出したトークンテーブル</returns>
         public Dictionary<string, List<TokenData>> ExtractTokenType(Dictionary<string, List<TokenData>> tokenTbl, string type)
-        {
-            var extractTokenTbl = new Dictionary<string, List<TokenData>>();
-
-            foreach(var key in tokenTbl.Keys)
-            {
-                if(tokenTbl[key][0].Type != type) { continue; }
-                extractTokenTbl[key] = new List<TokenData>(tokenTbl[key]);
-            }
-
-            return extractTokenTbl;
-        }
+            => AnalyzeLogic.ExtractTokenType(tokenTbl, type);
 
         #endregion
     }

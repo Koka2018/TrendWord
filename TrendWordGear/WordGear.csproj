@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Logic\AnalyzeLogic.cs" />
+    <Compile Include="Logic\ParagraphLogic.cs" />
     <Compile Include="Logic\WordLogic.cs" />
     <Compile Include="Model\TokenData.cs" />
     <Compile Include="WordCtrl.cs" />
