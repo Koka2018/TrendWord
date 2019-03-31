@@ -7,14 +7,92 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using WordGear;
 
 namespace TrendWordBox
 {
     public partial class MainForm : Form
     {
+        #region メンバ変数
+
+        private WordCtrl mWordCtrl = new WordCtrl();
+
+        #endregion
+
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
         public MainForm()
         {
             InitializeComponent();
         }
+
+        #region メインメニュー
+
+        /// <summary>
+        /// メインメニュー：ファイル > ファイル選択
+        /// </summary>
+        /// <param name="sender">送信元</param>
+        /// <param name="e">イベント</param>
+        private void menuOpenFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (var dlg = new OpenFileDialog()
+                {
+                    Filter = "テキスト|*.txt|すべてのファイル|*"
+                })
+                {
+                    if(dlg.ShowDialog() != DialogResult.OK) { return; }
+
+                    mTxtTgtText.Text = File.ReadAllText(dlg.FileName, Encoding.Default);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// メインメニュー：ファイル > 文章解析
+        /// </summary>
+        /// <param name="sender">送信元</param>
+        /// <param name="e">イベント</param>
+        private void mwnuSentenceAnalyzeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var sentenceList = mWordCtrl.SplitParagraph(mTxtTgtText.Text);
+
+                mTxtResult.Text = string.Empty;
+
+                var sb = new StringBuilder();
+                foreach(var sentence in sentenceList)
+                {
+                    var tokenList = mWordCtrl.GetTokenList(sentence);
+                    var tokenTypeTb = mWordCtrl.GetTokenTypeTbl(tokenList);
+
+                    sb.AppendLine("------------------------------");
+                    sb.AppendLine(sentence);
+                    foreach(var key in tokenTypeTb.Keys)
+                    {
+                        sb.AppendLine(string.Format("\t=== {0} ===", key));
+                        foreach(var token in tokenTypeTb[key])
+                        {
+                            sb.AppendLine("\t\t" + token.Word.Replace("\0", ""));
+                        }
+                    }
+                }
+                mTxtResult.Text = sb.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        #endregion
     }
 }
