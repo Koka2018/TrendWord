@@ -5,9 +5,9 @@ VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrendWordBox", "TrendWordBox\TrendWordBox.csproj", "{D7CDB0B6-6E48-4093-9DD3-3756E9B6BBEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrendWordGear", "TrendWordGear\TrendWordGear.csproj", "{5A8C0C83-B635-449E-8ECD-AACA8C94CB79}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordGear", "TrendWordGear\WordGear.csproj", "{5A8C0C83-B635-449E-8ECD-AACA8C94CB79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests_TrendWordGear", "Tests_TrendWordGear\Tests_TrendWordGear.csproj", "{3C6C1A85-68C1-4CF6-9FC8-2E06DEC89F31}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests_WordGear", "Tests_TrendWordGear\Tests_WordGear.csproj", "{3C6C1A85-68C1-4CF6-9FC8-2E06DEC89F31}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

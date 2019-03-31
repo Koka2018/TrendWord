@@ -1,10 +1,10 @@
 ﻿using NMeCab;
 using System.Collections.Generic;
-using TrendWordGear.Model;
+using WordGear.Model;
 
-namespace TrendWordGear
+namespace WordGear
 {
-    public class TrendWordCtrl
+    public class WordCtrl
     {
         #region メンバ変数
 
@@ -16,7 +16,7 @@ namespace TrendWordGear
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public TrendWordCtrl()
+        public WordCtrl()
         {
         }
 

@@ -61,9 +61,9 @@
     <Compile Include="Tests_TrendWordCtrl.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TrendWordGear\TrendWordGear.csproj">
+    <ProjectReference Include="..\TrendWordGear\WordGear.csproj">
       <Project>{5A8C0C83-B635-449E-8ECD-AACA8C94CB79}</Project>
-      <Name>TrendWordGear</Name>
+      <Name>WordGear</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

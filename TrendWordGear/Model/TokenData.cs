@@ -1,4 +1,4 @@
-﻿namespace TrendWordGear.Model
+﻿namespace WordGear.Model
 {
     public class TokenData
     {

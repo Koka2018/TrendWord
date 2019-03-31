@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 
-namespace TrendWordGear.Tests
+namespace WordGear.Tests
 {
     [TestClass()]
     public class Tests_TrendWordCtrl
@@ -9,7 +9,7 @@ namespace TrendWordGear.Tests
         [TestMethod()]
         public void インスタンスできること()
         {
-            var ctrl = new TrendWordCtrl();
+            var ctrl = new WordCtrl();
 
             Assert.IsNotNull(ctrl);
         }
@@ -19,7 +19,7 @@ namespace TrendWordGear.Tests
         [TestMethod]
         public void 文からトークンテーブルを取得できること()
         {
-            var ctrl = new TrendWordCtrl();
+            var ctrl = new WordCtrl();
             var text = "形態素解析とは、文法的な情報の注記の無い自然言語のテキストデータから、対象言語の文法や、辞書と呼ばれる単語の品詞等の情報にもとづき、形態素の列に分割し、それぞれの形態素の品詞等を判別する作業である。";
 
             var tbl = ctrl.GetBasicTokenTbl(text);
@@ -64,7 +64,7 @@ namespace TrendWordGear.Tests
         [TestMethod]
         public void 文からトークンリストを取得できること()
         {
-            var ctrl = new TrendWordCtrl();
+            var ctrl = new WordCtrl();
             var text = "形態素解析とは、文法的な情報の注記の無い自然言語のテキストデータから、対象言語の文法や、辞書と呼ばれる単語の品詞等の情報にもとづき、形態素の列に分割し、それぞれの形態素の品詞等を判別する作業である。";
 
             var tokenList = ctrl.GetTokenList(text);
@@ -104,7 +104,7 @@ namespace TrendWordGear.Tests
         [TestMethod]
         public void トークンリストの品詞分類ができること()
         {
-            var ctrl = new TrendWordCtrl();
+            var ctrl = new WordCtrl();
             var text = "形態素解析とは、文法的な情報の注記の無い自然言語のテキストデータから、対象言語の文法や、辞書と呼ばれる単語の品詞等の情報にもとづき、形態素の列に分割し、それぞれの形態素の品詞等を判別する作業である。";
             var tokenList = ctrl.GetTokenList(text);
             var tokenTypeTbl = ctrl.GetTokenTypeTbl(tokenList);
@@ -134,7 +134,7 @@ namespace TrendWordGear.Tests
         [DataRow("副詞", 0)]
         public void 品詞を限定したトークンリストを取得できること(string testData_type, int testData_tokenNum)
         {
-            var ctrl = new TrendWordCtrl();
+            var ctrl = new WordCtrl();
             var text = "形態素解析とは、文法的な情報の注記の無い自然言語のテキストデータから、対象言語の文法や、辞書と呼ばれる単語の品詞等の情報にもとづき、形態素の列に分割し、それぞれの形態素の品詞等を判別する作業である。";
             var tokenList = ctrl.GetTokenList(text);
             var extractedTokenList = ctrl.ExtractTokenType(tokenList, testData_type);
@@ -157,7 +157,7 @@ namespace TrendWordGear.Tests
         [DataRow("副詞", 0)]
         public void 品詞を限定したトークンテーブルを取得できること(string testData_type, int testData_tokenNum)
         {
-            var ctrl = new TrendWordCtrl();
+            var ctrl = new WordCtrl();
             var text = "形態素解析とは、文法的な情報の注記の無い自然言語のテキストデータから、対象言語の文法や、辞書と呼ばれる単語の品詞等の情報にもとづき、形態素の列に分割し、それぞれの形態素の品詞等を判別する作業である。";
             var tokenTbl = ctrl.GetBasicTokenTbl(text);
             var extractedTokenTbl = ctrl.ExtractTokenType(tokenTbl, testData_type);

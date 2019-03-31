@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace TrendWordGear.Model.Tests
+namespace WordGear.Model.Tests
 {
     [TestClass()]
     public class Tests_TokenData
