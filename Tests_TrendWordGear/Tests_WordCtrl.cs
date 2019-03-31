@@ -4,7 +4,7 @@ using System.Linq;
 namespace WordGear.Tests
 {
     [TestClass()]
-    public class Tests_TrendWordCtrl
+    public class Tests_WordCtrl
     {
         [TestMethod()]
         public void インスタンスできること()

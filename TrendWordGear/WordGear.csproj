@@ -46,7 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\TokenData.cs" />
-    <Compile Include="TrendWordCtrl.cs" />
+    <Compile Include="WordCtrl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
