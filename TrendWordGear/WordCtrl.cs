@@ -1,18 +1,11 @@
-﻿using NMeCab;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using WordGear.Model;
+using WordGear.Logic;
 
 namespace WordGear
 {
     public class WordCtrl
     {
-        #region メンバ変数
-
-        ///<summary> MeCabTagger </summary>
-        private MeCabTagger mTagger = MeCabTagger.Create();
-
-        #endregion
-
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -28,26 +21,7 @@ namespace WordGear
         /// <param name="text">テキスト</param>
         /// <returns>トークンテーブル</returns>
         public Dictionary<string, List<TokenData>> GetBasicTokenTbl(string text)
-        {
-            var tokenTbl = new Dictionary<string, List<TokenData>>();
-
-            var node = mTagger.ParseToNode(text);
-            node = node.Next;
-            while (node != null)
-            {
-                var token = new TokenData(node.Surface, node.Feature);
-
-                if(tokenTbl.ContainsKey(token.BasicWord) == false)
-                {
-                    tokenTbl[token.BasicWord] = new List<TokenData>();
-                }
-                tokenTbl[token.BasicWord].Add(token);
-
-                node = node.Next;
-            }
-
-            return tokenTbl;
-        }
+            => WordLogic.GetBasicTokenTbl(text);
 
         /// <summary>
         /// トークンリスト取得処理
@@ -55,21 +29,7 @@ namespace WordGear
         /// <param name="text">テキスト</param>
         /// <returns>トークンリスト</returns>
         public List<TokenData> GetTokenList(string text)
-        {
-            var tokenList = new List<TokenData>();
-
-            var node = mTagger.ParseToNode(text);
-            // 一つ目は原文が入っているため読み飛ばす
-            node = node.Next;
-            while (node != null)
-            {
-                tokenList.Add(new TokenData(node.Surface, node.Feature));
-
-                node = node.Next;
-            }
-
-            return tokenList;
-        }
+            => WordLogic.GetTokenList(text);
 
         /// <summary>
         /// トークンの品詞分類結果取得
@@ -77,19 +37,22 @@ namespace WordGear
         /// <param name="tokenList">トークンリスト</param>
         /// <returns>品詞分離結果</returns>
         public Dictionary<string, List<TokenData>> GetTokenTypeTbl(List<TokenData> tokenList)
+            => WordLogic.GetTokenTypeTbl(tokenList);
+
+        #endregion
+
+        #region 文章メソッド
+
+        /// <summary>
+        /// 文の切り出し処理
+        /// </summary>
+        /// <param name="paragraph">文章</param>
+        /// <returns>文リスト</returns>
+        public List<string> SplitParagraph(string paragraph)
         {
-            var tokenTypeTbl = new Dictionary<string, List<TokenData>>();
+            var sentenceList = new List<string>(paragraph.Split('。'));
 
-            foreach(var token in tokenList)
-            {
-                if(tokenTypeTbl.ContainsKey(token.Type)== false)
-                {
-                    tokenTypeTbl[token.Type] = new List<TokenData>();
-                }
-                tokenTypeTbl[token.Type].Add(token);
-            }
-
-            return tokenTypeTbl;
+            return sentenceList;
         }
 
         #endregion
