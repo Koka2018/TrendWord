@@ -179,10 +179,10 @@ namespace WordGear.Tests
         public void 文章から文を抽出できること()
         {
             var ctrl = new WordCtrl();
-            var text = "形態素解析とは、文法的な情報の注記の無い自然言語のテキストデータから、対象言語の文法や、辞書と呼ばれる単語の品詞等の情報にもとづき、形態素の列に分割し、それぞれの形態素の品詞等を判別する作業である。";
+            var text = "英語の文は日本語とは異なり、予め単語と単語の区切りがほとんどの箇所で明確に示される。このため、単語分割の処理は日本語の場合ほど複雑である必要はなく、簡単なルールに基づく場合が多い。例えば「It's a gift for Mr. Smith.」という文を解析することを考える。単語分割をすると以下のようになる。";
             var sentenceList = ctrl.SplitParagraph(text);
 
-            Assert.AreEqual(1, sentenceList.Count);
+            Assert.AreEqual(4, sentenceList.Count);
         }
     }
 }
