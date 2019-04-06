@@ -12,9 +12,9 @@ namespace WordGear.Logic
         /// <returns>文リスト</returns>
         public static List<string> SplitParagraph(string paragraph)
         {
-            var sentenceList = new List<string>(paragraph.Split('。'));
+            var sentenceList = new List<string>(paragraph.Replace("\r", "").Split('。', '\n'));
 
-            if(sentenceList.Last().Length == 0)
+            if (sentenceList.Last().Length == 0)
             {
                 sentenceList.RemoveAt(sentenceList.Count - 1);
             }
