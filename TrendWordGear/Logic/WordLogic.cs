@@ -1,5 +1,6 @@
 ﻿using NMeCab;
 using System.Collections.Generic;
+using System.Linq;
 using WordGear.Model;
 
 namespace WordGear.Logic
@@ -23,20 +24,14 @@ namespace WordGear.Logic
         public static Dictionary<string, List<TokenData>> GetBasicTokenTbl(string text)
         {
             var tokenTbl = new Dictionary<string, List<TokenData>>();
-
-            var node = sTagger.ParseToNode(text.Replace("\0", ""));
-            node = node.Next;
-            while (node != null)
+            var tokenList = GetTokenList(text);
+            foreach(var token in tokenList)
             {
-                var token = new TokenData(node.Surface, node.Feature);
-
                 if (tokenTbl.ContainsKey(token.BasicWord) == false)
                 {
                     tokenTbl[token.BasicWord] = new List<TokenData>();
                 }
                 tokenTbl[token.BasicWord].Add(token);
-
-                node = node.Next;
             }
 
             return tokenTbl;
@@ -61,7 +56,7 @@ namespace WordGear.Logic
                 node = node.Next;
             }
 
-            return tokenList;
+            return RefineTokenList(tokenList);
         }
 
         /// <summary>
@@ -85,6 +80,26 @@ namespace WordGear.Logic
             return tokenTypeTbl;
         }
 
-        #endregion
+        private static List<TokenData> RefineTokenList(List<TokenData> tokenList)
+        {
+            if(tokenList.Count == 0) { return tokenList; }
+
+            var refinedTokenList = new List<TokenData>();
+            refinedTokenList.Add(tokenList.First());
+            for(int i = 1; i < tokenList.Count; i++)
+            {
+                if(refinedTokenList.Last().Type == "名詞"
+                    && refinedTokenList.Last().Type == tokenList[i].Type)
+                {
+                    refinedTokenList[refinedTokenList.Count - 1] = refinedTokenList.Last() + tokenList[i];
+                    continue;
+                }
+                refinedTokenList.Add(tokenList[i]);
+            }
+
+            return refinedTokenList;
+        }
+
+#endregion
     }
 }

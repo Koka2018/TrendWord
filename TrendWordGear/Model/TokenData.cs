@@ -145,6 +145,46 @@
             }
         }
 
+        /// <summary>
+        /// トークンの結合
+        /// </summary>
+        /// <param name="left">トークン左</param>
+        /// <param name="right">トークン右</param>
+        /// <returns>結合トークン</returns>
+        public static TokenData operator +(TokenData left, TokenData right)
+        {
+            var newToken = new TokenData(left.Word + right.Word, left.Feature);
+
+            newToken.Type = MargeLabel(left.Type, right.Type);
+            newToken.DetailType1 = MargeLabel(left.DetailType1, right.DetailType1);
+            newToken.DetailType2 = MargeLabel(left.DetailType2, right.DetailType2);
+            newToken.DetailType3 = MargeLabel(left.DetailType3, right.DetailType3);
+
+            newToken.AdaptMethod = MargeLabel(left.AdaptMethod, right.AdaptMethod);
+            newToken.AdaptType = MargeLabel(left.AdaptType, right.AdaptType);
+            newToken.BasicWord = left.BasicWord + right.BasicWord;
+            newToken.WayOfRead = left.WayOfRead + right.WayOfRead;
+            newToken.Pronunciation = left.Pronunciation + right.Pronunciation;
+
+            newToken.Feature = string.Join(",",
+                                                newToken.Type,
+                                                newToken.DetailType1,
+                                                newToken.DetailType2,
+                                                newToken.DetailType3,
+                                                newToken.AdaptMethod,
+                                                newToken.AdaptType,
+                                                newToken.BasicWord,
+                                                newToken.WayOfRead,
+                                                newToken.Pronunciation);
+
+            return newToken;
+        }
+
+        public static string MargeLabel(string left, string right)
+        {
+            return (left == right) ? left : string.Format("{0}+{1}", left, right);
+        }
+
         #endregion
     }
 }
