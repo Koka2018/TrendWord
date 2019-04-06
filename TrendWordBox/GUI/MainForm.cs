@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using WordGear;
+using WordGear.Logic;
 
 namespace TrendWordBox
 {
@@ -59,23 +60,23 @@ namespace TrendWordBox
         {
             try
             {
-                var sentenceList = mWordCtrl.SplitParagraph(mTxtTgtText.Text);
-
                 mTxtResult.Text = string.Empty;
-
                 var sb = new StringBuilder();
-                foreach(var sentence in sentenceList)
-                {
-                    var tokenList = mWordCtrl.GetTokenList(sentence);
-                    var tokenTbl = mWordCtrl.GetBasicTokenTbl(sentence);
-                    var tokenTypeTb = mWordCtrl.GetTokenTypeTbl(tokenList);
+                var ctrl = new WordCtrl();
 
+                ctrl.Analyze(mTxtTgtText.Text);
+                sb.AppendLine("====================");
+                sb.AppendFormat("情報量={0:#.#}[%]", ctrl.InfoRate).AppendLine();
+                sb.AppendLine("====================");
+                foreach(var paragraph in ctrl.ParagraphList)
+                {
                     sb.AppendLine("------------------------------");
-                    sb.AppendLine(sentence);
-                    foreach(var key in tokenTypeTb.Keys)
+                    sb.AppendLine(paragraph.Text);
+                    sb.AppendFormat("情報量={0:#.#}[%]", paragraph.InfoRate * 100).AppendLine();
+                    foreach(var key in paragraph.TokenTypeTbl.Keys)
                     {
                         sb.AppendLine(string.Format("\t=== {0} ===", key));
-                        var extractTokenTbl = mWordCtrl.ExtractTokenType(tokenTbl, key);
+                        var extractTokenTbl = AnalyzeLogic.ExtractTokenType(paragraph.TokenTbl, key);
                         foreach(var token in extractTokenTbl.Keys)
                         {
                             sb.AppendLine(string.Format("\t\t{0}: {1}",

@@ -5,6 +5,18 @@ namespace WordGear.Logic
 {
     public static class AnalyzeLogic
     {
+        #region 定数
+
+        ///<summary> 情報量扱いとする品詞リスト </summary>
+        private static readonly List<string> cInfoTokenType = new List<string>()
+        {
+            "名詞",
+            "動詞",
+            "形容詞",
+        };
+
+        #endregion
+
         /// <summary>
         /// 品詞指定によるトークンリスト抽出処理
         /// </summary>
@@ -42,6 +54,23 @@ namespace WordGear.Logic
             }
 
             return extractTokenTbl;
+        }
+
+        /// <summary>
+        /// 情報量の算出処理
+        /// </summary>
+        /// <returns>情報量</returns>
+        public static double CalcInfoRate(List<TokenData> tokenList)
+        {
+            var totalTokenNum = tokenList.Count;
+            var infoNum = 0;
+
+            foreach (var infoToken in cInfoTokenType)
+            {
+                infoNum += ExtractTokenType(tokenList, infoToken).Count;
+            }
+
+            return (double)infoNum / totalTokenNum;
         }
     }
 }

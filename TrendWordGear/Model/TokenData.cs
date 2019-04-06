@@ -180,6 +180,12 @@
             return newToken;
         }
 
+        /// <summary>
+        /// ラベルの結合処理
+        /// </summary>
+        /// <param name="left">ラベル左</param>
+        /// <param name="right">ラベル右</param>
+        /// <returns>結合ラベル</returns>
         public static string MargeLabel(string left, string right)
         {
             return (left == right) ? left : string.Format("{0}+{1}", left, right);

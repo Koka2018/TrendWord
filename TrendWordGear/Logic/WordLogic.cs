@@ -25,7 +25,7 @@ namespace WordGear.Logic
         {
             var tokenTbl = new Dictionary<string, List<TokenData>>();
             var tokenList = GetTokenList(text);
-            foreach(var token in tokenList)
+            foreach (var token in tokenList)
             {
                 if (tokenTbl.ContainsKey(token.BasicWord) == false)
                 {
@@ -82,13 +82,13 @@ namespace WordGear.Logic
 
         private static List<TokenData> RefineTokenList(List<TokenData> tokenList)
         {
-            if(tokenList.Count == 0) { return tokenList; }
+            if (tokenList.Count == 0) { return tokenList; }
 
             var refinedTokenList = new List<TokenData>();
             refinedTokenList.Add(tokenList.First());
-            for(int i = 1; i < tokenList.Count; i++)
+            for (int i = 1; i < tokenList.Count; i++)
             {
-                if(refinedTokenList.Last().Type == "名詞"
+                if (refinedTokenList.Last().Type == "名詞"
                     && refinedTokenList.Last().Type == tokenList[i].Type)
                 {
                     refinedTokenList[refinedTokenList.Count - 1] = refinedTokenList.Last() + tokenList[i];
@@ -100,6 +100,6 @@ namespace WordGear.Logic
             return refinedTokenList;
         }
 
-#endregion
+        #endregion
     }
 }
