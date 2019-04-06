@@ -56,7 +56,8 @@ namespace WordGear.Logic
                 node = node.Next;
             }
 
-            return RefineTokenList(tokenList);
+            //return RefineTokenList(tokenList);
+            return tokenList;
         }
 
         /// <summary>

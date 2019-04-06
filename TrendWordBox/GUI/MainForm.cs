@@ -66,9 +66,20 @@ namespace TrendWordBox
 
                 ctrl.Analyze(mTxtTgtText.Text);
                 sb.AppendLine("====================");
-                sb.AppendFormat("情報量={0:#.#}[%]", ctrl.InfoRate).AppendLine();
+                sb.AppendFormat("情報量={0:#.#}[%]", ctrl.InfoRate * 100).AppendLine();
                 sb.AppendLine("====================");
-                foreach(var paragraph in ctrl.ParagraphList)
+                foreach (var key in ctrl.TokenTypeTbl.Keys)
+                {
+                    sb.AppendLine(string.Format("\t=== {0} ===", key));
+                    var extractTokenTbl = AnalyzeLogic.ExtractTokenType(ctrl.TokenTbl, key);
+                    foreach (var token in extractTokenTbl.Keys)
+                    {
+                        sb.AppendLine(string.Format("\t\t{0}: {1}",
+                                                    token.Replace("\0", ""),
+                                                    extractTokenTbl[token].Count()));
+                    }
+                }
+                foreach (var paragraph in ctrl.ParagraphList)
                 {
                     sb.AppendLine("------------------------------");
                     sb.AppendLine(paragraph.Text);
